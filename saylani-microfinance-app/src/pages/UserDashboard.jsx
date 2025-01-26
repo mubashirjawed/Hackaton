@@ -35,7 +35,7 @@ const UserDashboard = () => {
   const fetchLoans = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("user") || "{}")
-      const response = await axios.get(`http://localhost:5000/api/loans/user/${user.id}`, {
+      const response = await axios.get(`https://hackaton-kappa-self.vercel.app/api/loans/user/${user.id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       setLoans(response.data)
@@ -53,7 +53,7 @@ const UserDashboard = () => {
     try {
       const user = JSON.parse(localStorage.getItem("user") || "{}")
       await axios.post(
-        "http://localhost:5000/api/loans/submit",
+        "https://hackaton-kappa-self.vercel.app/api/loans/submit",
         { ...loanRequest, user: user.id },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } },
       )

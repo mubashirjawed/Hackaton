@@ -1,7 +1,16 @@
-import React, { useState } from "react"
-import { Container, Typography, TextField, Button, Box, Paper, Alert, Grid } from "@mui/material"
-import { useNavigate, Link as RouterLink } from "react-router-dom"
-import axios from "axios"
+import React, { useState } from "react";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Box,
+  Paper,
+  Alert,
+  Grid,
+} from "@mui/material";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
+import axios from "axios";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -9,25 +18,28 @@ const RegisterPage = () => {
     email: "",
     fullName: "",
     password: "",
-  })
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
-  const navigate = useNavigate()
+  });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/users/register", formData)
-      setSuccess("Registration successful. Please login.")
-      setTimeout(() => navigate("/login"), 3000)
+      await axios.post(
+        "https://hackaton-kappa-self.vercel.app/api/users/register",
+        formData
+      );
+      setSuccess("Registration successful. Please login.");
+      setTimeout(() => navigate("/login"), 3000);
     } catch (error) {
-      setError("Registration failed. Please try again.")
+      setError("Registration failed. Please try again.");
     }
-  }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -43,7 +55,12 @@ const RegisterPage = () => {
           boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
         }}
       >
-        <Typography variant="h4" component="h1" gutterBottom sx={{ color: "#1565C0", fontWeight: "bold" }}>
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          sx={{ color: "#1565C0", fontWeight: "bold" }}
+        >
           Register
         </Typography>
         {error && (
@@ -56,7 +73,11 @@ const RegisterPage = () => {
             {success}
           </Alert>
         )}
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: "100%" }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ mt: 1, width: "100%" }}
+        >
           <TextField
             margin="normal"
             required
@@ -116,7 +137,10 @@ const RegisterPage = () => {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <RouterLink to="/login" style={{ color: "#1565C0", textDecoration: "none" }}>
+              <RouterLink
+                to="/login"
+                style={{ color: "#1565C0", textDecoration: "none" }}
+              >
                 Already have an account? Sign In
               </RouterLink>
             </Grid>
@@ -124,8 +148,7 @@ const RegisterPage = () => {
         </Box>
       </Paper>
     </Container>
-  )
-}
+  );
+};
 
-export default RegisterPage
-
+export default RegisterPage;

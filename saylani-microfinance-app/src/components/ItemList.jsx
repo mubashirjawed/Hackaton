@@ -11,7 +11,7 @@ const ItemList = () => {
 
   const fetchItems = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/items");
+      const response = await axios.get("https://hackaton-kappa-self.vercel.app/api/items");
       setItems(response.data);
     } catch (error) {
       console.error("Error fetching items:", error);
@@ -20,7 +20,7 @@ const ItemList = () => {
 
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/items/${id}`);
+      await axios.delete(`https://hackaton-kappa-self.vercel.app/api/items/${id}`);
       fetchItems();
     } catch (error) {
       console.error("Error deleting item:", error);

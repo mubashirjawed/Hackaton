@@ -15,7 +15,7 @@ const ItemForm = () => {
 
   const fetchItem = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/items/${id}`);
+      const response = await axios.get(`https://hackaton-kappa-self.vercel.app/api/items/${id}`);
       setItem(response.data);
     } catch (error) {
       console.error("Error fetching item:", error);
@@ -26,9 +26,9 @@ const ItemForm = () => {
     e.preventDefault();
     try {
       if (id) {
-        await axios.patch(`http://localhost:5000/api/items/${id}`, item);
+        await axios.patch(`https://hackaton-kappa-self.vercel.app/api/items/${id}`, item);
       } else {
-        await axios.post("http://localhost:5000/api/items", item);
+        await axios.post("https://hackaton-kappa-self.vercel.app/api/items", item);
       }
       navigate("/");
     } catch (error) {

@@ -39,7 +39,7 @@ const LoanRequestPage = () => {
     e.preventDefault()
     try {
       const user = JSON.parse(localStorage.getItem("user") || "{}")
-      const response = await axios.post("http://localhost:5000/api/loans/submit", {
+      const response = await axios.post("https://hackaton-kappa-self.vercel.app/api/loans/submit", {
         ...loanDetails,
         guarantor1,
         guarantor2,

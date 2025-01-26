@@ -18,7 +18,7 @@ const ResetPasswordPage = () => {
       return
     }
     try {
-      await axios.post("http://localhost:5000/api/users/reset-password", { token, password })
+      await axios.post("https://hackaton-kappa-self.vercel.app/api/users/reset-password", { token, password })
       setSuccess("Password reset successfully. You will be redirected to login.")
       setTimeout(() => navigate("/login"), 3000)
     } catch (error) {

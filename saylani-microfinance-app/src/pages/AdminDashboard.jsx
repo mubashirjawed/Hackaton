@@ -30,7 +30,7 @@ const AdminDashboard = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/users/all", {
+      const response = await axios.get("https://hackaton-kappa-self.vercel.app/api/users/all", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       setUsers(response.data)
@@ -41,7 +41,7 @@ const AdminDashboard = () => {
 
   const fetchLoans = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/loans/all", {
+      const response = await axios.get("https://hackaton-kappa-self.vercel.app/api/loans/all", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       setLoans(response.data)
@@ -57,7 +57,7 @@ const AdminDashboard = () => {
   const handleUpdateLoanStatus = async (loanId, newStatus) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/loans/${loanId}`,
+        `https://hackaton-kappa-self.vercel.app/api/loans/${loanId}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } },
       )
