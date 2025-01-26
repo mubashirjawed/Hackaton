@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Container, Typography, TextField, Button, Box, Paper, Alert, Grid } from "@mui/material"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link as RouterLink } from "react-router-dom"
 import axios from "axios"
 
 const LoginPage = () => {
@@ -29,8 +29,19 @@ const LoginPage = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Paper elevation={6} sx={{ mt: 8, p: 4, display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <Typography variant="h4" component="h1" gutterBottom>
+      <Paper
+        elevation={6}
+        sx={{
+          mt: 8,
+          p: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          borderRadius: "16px",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+        }}
+      >
+        <Typography variant="h4" component="h1" gutterBottom sx={{ color: "#1565C0", fontWeight: "bold" }}>
           Login
         </Typography>
         {error && (
@@ -63,14 +74,24 @@ const LoginPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              mt: 3,
+              mb: 2,
+              backgroundColor: "#2E7D32",
+              "&:hover": { backgroundColor: "#1B5E20" },
+            }}
+          >
             Sign In
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Button color="primary" onClick={() => navigate("/register")}>
+              <RouterLink to="/register" style={{ color: "#1565C0", textDecoration: "none" }}>
                 Don't have an account? Sign Up
-              </Button>
+              </RouterLink>
             </Grid>
           </Grid>
         </Box>

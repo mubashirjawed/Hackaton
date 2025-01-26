@@ -13,6 +13,8 @@ import {
   Tab,
   Button,
   Box,
+  Card,
+  CardContent,
 } from "@mui/material"
 import axios from "axios"
 
@@ -66,8 +68,8 @@ const AdminDashboard = () => {
   }
 
   return (
-    <Container maxWidth="lg">
-      <Typography variant="h4" gutterBottom sx={{ mt: 4 }}>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Typography variant="h4" gutterBottom sx={{ color: "#1565C0", fontWeight: "bold" }}>
         Admin Dashboard
       </Typography>
       <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 2 }}>
@@ -76,76 +78,86 @@ const AdminDashboard = () => {
           <Tab label="Loan Applications" />
         </Tabs>
       </Box>
-      {tabValue === 0 && (
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>CNIC</TableCell>
-                <TableCell>Full Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Role</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {users.map((user) => (
-                <TableRow key={user._id}>
-                  <TableCell>{user.cnic}</TableCell>
-                  <TableCell>{user.fullName}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.role}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
-      {tabValue === 1 && (
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>User</TableCell>
-                <TableCell>Category</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Created At</TableCell>
-                <TableCell>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {loans.map((loan) => (
-                <TableRow key={loan._id}>
-                  <TableCell>{loan.user.fullName}</TableCell>
-                  <TableCell>{loan.category}</TableCell>
-                  <TableCell>{loan.amount}</TableCell>
-                  <TableCell>{loan.status}</TableCell>
-                  <TableCell>{new Date(loan.createdAt).toLocaleString()}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      onClick={() => handleUpdateLoanStatus(loan._id, "Approved")}
-                      disabled={loan.status === "Approved"}
-                      sx={{ mr: 1 }}
-                    >
-                      Approve
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      onClick={() => handleUpdateLoanStatus(loan._id, "Rejected")}
-                      disabled={loan.status === "Rejected"}
-                    >
-                      Reject
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+      <Card sx={{ borderRadius: "16px", boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}>
+        <CardContent>
+          {tabValue === 0 && (
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>CNIC</TableCell>
+                    <TableCell>Full Name</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>Role</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {users.map((user) => (
+                    <TableRow key={user._id}>
+                      <TableCell>{user.cnic}</TableCell>
+                      <TableCell>{user.fullName}</TableCell>
+                      <TableCell>{user.email}</TableCell>
+                      <TableCell>{user.role}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
+          {tabValue === 1 && (
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>User</TableCell>
+                    <TableCell>Category</TableCell>
+                    <TableCell>Amount</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Created At</TableCell>
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {loans.map((loan) => (
+                    <TableRow key={loan._id}>
+                      <TableCell>{loan.user.fullName}</TableCell>
+                      <TableCell>{loan.category}</TableCell>
+                      <TableCell>{loan.amount}</TableCell>
+                      <TableCell>{loan.status}</TableCell>
+                      <TableCell>{new Date(loan.createdAt).toLocaleString()}</TableCell>
+                      <TableCell>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          onClick={() => handleUpdateLoanStatus(loan._id, "Approved")}
+                          disabled={loan.status === "Approved"}
+                          sx={{
+                            mr: 1,
+                            backgroundColor: "#2E7D32",
+                            color: "white",
+                            "&:hover": { backgroundColor: "#1B5E20" },
+                          }}
+                        >
+                          Approve
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          color="secondary"
+                          onClick={() => handleUpdateLoanStatus(loan._id, "Rejected")}
+                          disabled={loan.status === "Rejected"}
+                          sx={{ backgroundColor: "#C62828", color: "white", "&:hover": { backgroundColor: "#B71C1C" } }}
+                        >
+                          Reject
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
+        </CardContent>
+      </Card>
     </Container>
   )
 }

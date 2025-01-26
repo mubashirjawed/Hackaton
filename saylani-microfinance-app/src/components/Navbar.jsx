@@ -3,7 +3,6 @@ import { Link as RouterLink, useNavigate } from "react-router-dom"
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
   IconButton,
   Drawer,
@@ -31,10 +30,12 @@ const Navbar = () => {
 
   const navItems = user.id
     ? [
+        { text: "Home", link: "/" },
         { text: "Dashboard", link: user.role === "admin" ? "/admin-dashboard" : "/user-dashboard" },
         { text: "Logout", onClick: handleLogout },
       ]
     : [
+        { text: "Home", link: "/" },
         { text: "Login", link: "/login" },
         { text: "Register", link: "/register" },
       ]
@@ -47,7 +48,7 @@ const Navbar = () => {
         component={item.link ? RouterLink : "button"}
         to={item.link}
         onClick={item.onClick}
-        sx={{ mx: 1 }}
+        sx={{ mx: 1, "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" } }}
       >
         {item.text}
       </Button>
@@ -56,32 +57,26 @@ const Navbar = () => {
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: "#2E7D32" }}>
-        <Toolbar>
-          <Typography
-            variant="h6"
-            component={RouterLink}
-            to="/"
-            sx={{ flexGrow: 1, textDecoration: "none", color: "inherit", display: "flex", alignItems: "center" }}
-          >
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <RouterLink to="/" style={{ textDecoration: "none", color: "inherit" }}>
             <Box
               component="img"
-              src="https://www.saylaniwelfare.com/public/images/saylani/Saylani-logo.png"
+              src="https://saylaniwelfareusa.com/static/media/logo_saylaniwelfareusa.22bf709605809177256c.png"
               alt="Saylani Logo"
-              sx={{ height: 40, mr: 1 }}
+              sx={{ height: 50, mr: 1 }}
             />
-            Saylani Microfinance
-          </Typography>
+          </RouterLink>
           {isMobile ? (
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setDrawerOpen(true)}>
               <MenuIcon />
             </IconButton>
           ) : (
-            renderNavItems()
+            <Box>{renderNavItems()}</Box>
           )}
         </Toolbar>
       </AppBar>
       <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <List>
+        <List sx={{ width: 250 }}>
           {navItems.map((item) => (
             <ListItem
               button

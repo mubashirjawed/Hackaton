@@ -76,26 +76,42 @@ const LandingPage = () => {
         }}
       >
         <Container maxWidth="md">
-          <Typography variant="h2" component="h1" gutterBottom>
+          <Typography
+            variant="h2"
+            component="h1"
+            gutterBottom
+            sx={{ fontWeight: "bold", textShadow: "2px 2px 4px rgba(0,0,0,0.5)" }}
+          >
             Empower Your Dreams
           </Typography>
-          <Typography variant="h5" paragraph>
+          <Typography variant="h5" paragraph sx={{ textShadow: "1px 1px 2px rgba(0,0,0,0.5)" }}>
             Saylani Microfinance offers accessible loans to help you achieve your goals.
           </Typography>
-          <Button variant="contained" color="primary" component={RouterLink} to="/register" size="large" sx={{ mt: 2 }}>
+          <Button
+            variant="contained"
+            color="primary"
+            component={RouterLink}
+            to="/register"
+            size="large"
+            sx={{
+              mt: 2,
+              backgroundColor: "#2E7D32",
+              "&:hover": { backgroundColor: "#1B5E20" },
+            }}
+          >
             Apply Now
           </Button>
         </Container>
       </Box>
 
       <Container maxWidth="lg" sx={{ mt: 8, mb: 8 }}>
-        <Typography variant="h3" align="center" gutterBottom>
+        <Typography variant="h3" align="center" gutterBottom sx={{ color: "#2E7D32", fontWeight: "bold" }}>
           Loan Calculator
         </Typography>
-        <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
+        <Paper elevation={3} sx={{ p: 4, mb: 4, borderRadius: "16px", boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}>
           <Grid container spacing={4}>
             <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom sx={{ color: "#1565C0" }}>
                 Loan Details
               </Typography>
               <TextField
@@ -115,7 +131,7 @@ const LandingPage = () => {
                   </option>
                 ))}
               </TextField>
-              <Typography gutterBottom>Loan Amount: Rs. {loanAmount}</Typography>
+              <Typography gutterBottom>Loan Amount: Rs. {loanAmount.toLocaleString()}</Typography>
               <Slider
                 value={loanAmount}
                 onChange={(_, newValue) => setLoanAmount(newValue)}
@@ -123,7 +139,8 @@ const LandingPage = () => {
                 max={selectedCategory.maxAmount}
                 step={10000}
                 valueLabelDisplay="auto"
-                valueLabelFormat={(value) => `Rs. ${value}`}
+                valueLabelFormat={(value) => `Rs. ${value.toLocaleString()}`}
+                sx={{ color: "#2E7D32" }}
               />
               <Typography gutterBottom sx={{ mt: 2 }}>
                 Loan Tenure: {loanTenure} months
@@ -135,35 +152,54 @@ const LandingPage = () => {
                 max={selectedCategory.maxTenure}
                 valueLabelDisplay="auto"
                 valueLabelFormat={(value) => `${value} months`}
+                sx={{ color: "#2E7D32" }}
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom sx={{ color: "#1565C0" }}>
                 Loan Summary
               </Typography>
-              <Typography variant="body1">Loan Amount: Rs. {loanAmount}</Typography>
+              <Typography variant="body1">Loan Amount: Rs. {loanAmount.toLocaleString()}</Typography>
               <Typography variant="body1">Loan Tenure: {loanTenure} months</Typography>
               <Typography variant="body1">Interest Rate: 10% per annum</Typography>
-              <Typography variant="h6" sx={{ mt: 2 }}>
+              <Typography variant="h6" sx={{ mt: 2, color: "#2E7D32" }}>
                 Estimated Monthly EMI: Rs. {calculateEMI()}
               </Typography>
-              <Button variant="contained" color="primary" component={RouterLink} to="/register" sx={{ mt: 2 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                component={RouterLink}
+                to="/register"
+                sx={{
+                  mt: 2,
+                  backgroundColor: "#2E7D32",
+                  "&:hover": { backgroundColor: "#1B5E20" },
+                }}
+              >
                 Apply for This Loan
               </Button>
             </Grid>
           </Grid>
         </Paper>
 
-        <Typography variant="h3" align="center" gutterBottom>
+        <Typography variant="h3" align="center" gutterBottom sx={{ color: "#2E7D32", fontWeight: "bold", mt: 8 }}>
           Our Loan Categories
         </Typography>
         <Grid container spacing={4}>
           {loanCategories.map((category) => (
             <Grid item key={category.name} xs={12} sm={6} md={3}>
-              <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  borderRadius: "16px",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+                }}
+              >
                 <CardMedia component="img" height="140" image={category.image} alt={category.name} />
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography gutterBottom variant="h5" component="div" sx={{ color: "#1565C0", fontWeight: "bold" }}>
                     {category.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">

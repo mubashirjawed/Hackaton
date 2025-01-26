@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import { Container, Typography, TextField, Button, Box, Paper, Alert } from "@mui/material"
-import { useNavigate } from "react-router-dom"
+import { Container, Typography, TextField, Button, Box, Paper, Alert, Grid } from "@mui/material"
+import { useNavigate, Link as RouterLink } from "react-router-dom"
 import axios from "axios"
 
 const RegisterPage = () => {
@@ -30,22 +30,33 @@ const RegisterPage = () => {
   }
 
   return (
-    <Container maxWidth="xs">
-      <Paper elevation={3} sx={{ mt: 8, p: 4 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+    <Container component="main" maxWidth="xs">
+      <Paper
+        elevation={6}
+        sx={{
+          mt: 8,
+          p: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          borderRadius: "16px",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+        }}
+      >
+        <Typography variant="h4" component="h1" gutterBottom sx={{ color: "#1565C0", fontWeight: "bold" }}>
           Register
         </Typography>
         {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
+          <Alert severity="error" sx={{ mb: 2, width: "100%" }}>
             {error}
           </Alert>
         )}
         {success && (
-          <Alert severity="success" sx={{ mb: 2 }}>
+          <Alert severity="success" sx={{ mb: 2, width: "100%" }}>
             {success}
           </Alert>
         )}
-        <Box component="form" onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, width: "100%" }}>
           <TextField
             margin="normal"
             required
@@ -90,9 +101,26 @@ const RegisterPage = () => {
             value={formData.password}
             onChange={handleChange}
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              mt: 3,
+              mb: 2,
+              backgroundColor: "#2E7D32",
+              "&:hover": { backgroundColor: "#1B5E20" },
+            }}
+          >
             Register
           </Button>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <RouterLink to="/login" style={{ color: "#1565C0", textDecoration: "none" }}>
+                Already have an account? Sign In
+              </RouterLink>
+            </Grid>
+          </Grid>
         </Box>
       </Paper>
     </Container>
