@@ -56,7 +56,7 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: "#2E7D32" }}>
+      <AppBar position="static" sx={{ backgroundColor: "#1CAC78" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <RouterLink to="/" style={{ textDecoration: "none", color: "inherit" }}>
             <Box
